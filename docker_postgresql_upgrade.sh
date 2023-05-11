@@ -32,7 +32,7 @@ sleep 1
 echo " "
 echo "Exporting New PostgreSQL file..."
 datetime=$(date +%Y-%m-%d_%H_%M_%S)
-sudo docker exec -i postgres-upgrade-testing pg_dump -U postgres $DBname | ../"${DBname}_dump_${datetime}".sql
+docker exec -i postgres-upgrade-testing pg_dump -U postgres $DBname | sudo tee ../"${DBname}_dump_${datetime}".sql > /dev/null
 sudo chown "$USER":"$USER" "${DBname}_dump_${datetime}".sql
 cd ..
 
