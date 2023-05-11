@@ -43,7 +43,7 @@ docker stop postgres-upgrade-testing
 docker rm postgres-upgrade-testing
 docker rmi "postgres:$OLD" "postgres:$NEW"
 sudo rm -fr postgres-upgrade-testing
-unset OLD NEW DBname SQLFILE
+unset OLD NEW DBname SQLFILE datetime
 
 echo " "
 echo "Container Deleted"
