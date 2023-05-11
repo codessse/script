@@ -15,7 +15,7 @@ sleep 1
 echo "Container Created"
 echo "Processing Old PostgreSQL..."
 docker exec -i postgres-upgrade-testing psql -U postgres -c "CREATE DATABASE $DBname;"
-cat $SQLFILE | docker exec -i postgres-upgrade-testing psql -U postgres -d $DBname
+cat $SQLFILE | docker exec -i postgres-upgrade-testing psql -U postgres -d $DBname  &> /dev/null
 
 docker stop postgres-upgrade-testing
 docker rm postgres-upgrade-testing
