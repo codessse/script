@@ -26,6 +26,8 @@ docker run --rm -v "$PWD":/var/lib/postgresql "tianon/postgres-upgrade:$OLD-to-$
 echo "Processing New PostgreSQL..."
 docker run -dit --name postgres-upgrade-testing -e POSTGRES_PASSWORD=password -v "$PWD/$NEW/data":/var/lib/postgresql/data "postgres:$NEW"
 
+sleep 1
+
 sudo chown -R $USER:$USER ..
 echo "Exporting New PostgreSQL file..."
 docker exec -i postgres-upgrade-testing pg_dump -U postgres $DBname > ../${DBname}_dump_$(date +%Y-%m-%d_%H_%M_%S).sql
