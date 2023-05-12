@@ -9,7 +9,7 @@ SQLFILE='./testDB_backup.sql'
 
 echo "Create Old PostgreSQL container..."
 docker run -dit --name postgres-upgrade-testing -e POSTGRES_PASSWORD=password -v "$PWD/$OLD/data":/var/lib/postgresql/data "postgres:$OLD"
-sleep 1
+wait
 echo " "
 echo "Container Created"
 
@@ -27,12 +27,13 @@ docker run --rm -v "$PWD":/var/lib/postgresql "tianon/postgres-upgrade:$OLD-to-$
 echo " "
 echo "Processing New PostgreSQL..."
 docker run -dit --name postgres-upgrade-testing -e POSTGRES_PASSWORD=password -v "$PWD/$NEW/data":/var/lib/postgresql/data "postgres:$NEW"
-sleep 1
+wait
 
 echo " "
 echo "Exporting New PostgreSQL file..."
 datetime=$(date +%Y-%m-%d_%H_%M_%S)
 docker exec -i postgres-upgrade-testing pg_dump -U postgres $DBname | sudo tee "../${DBname}_dump_${datetime}.sql" > /dev/null
+wait
 sudo chown "$USER":"$USER" "../${DBname}_dump_${datetime}.sql"
 cd ..
 
