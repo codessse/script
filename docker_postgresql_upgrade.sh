@@ -4,7 +4,7 @@ mkdir -p postgres-upgrade-testing
 cd postgres-upgrade-testing || exit
 OLD='12'
 NEW='15'
-DBname='testDB'
+DBname='testdb'
 SQLFILE='./testDB_backup.sql'
 
 echo "Create Old PostgreSQL container..."
